@@ -3,14 +3,14 @@
         <ui:VisualElement name="ItemList" style="width: 30%; height: 100%; flex-grow: 1;">
             <ui:VisualElement name="Header" style="flex-direction: row; justify-content: space-between; align-items: auto; font-size: 15px;">
                 <ui:Label text="ItemList" display-tooltip-when-elided="true" />
-                <ui:Button text="+" display-tooltip-when-elided="true" style="flex-direction: row;" />
+                <ui:Button text="+" display-tooltip-when-elided="true" name="AddButton" style="flex-direction: row;" />
             </ui:VisualElement>
             <ui:ListView focusable="true" name="ListView" reorderable="true" show-add-remove-footer="false" show-bound-collection-size="true" style="flex-grow: 1; width: auto; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(0, 0, 0); border-right-color: rgb(0, 0, 0); border-top-color: rgb(0, 0, 0); border-bottom-color: rgb(0, 0, 0); margin-left: 1px; margin-right: 1px; margin-top: 1px; margin-bottom: 1px; max-height: 4000px; min-height: 60px;" />
         </ui:VisualElement>
         <ui:ScrollView view-data-key="itemDetails" name="itemDetails" style="width: 70%; flex-grow: 1; height: 100%; padding-left: 5px; padding-right: 5px; padding-top: 5px; padding-bottom: 5px;">
             <ui:VisualElement name="Header" style="flex-direction: row; justify-content: space-between; align-items: auto; margin-left: 0; margin-right: 0; margin-top: 0; margin-bottom: 0;">
                 <ui:Label text="DetailsInformation" display-tooltip-when-elided="true" style="font-size: 15px; -unity-font-style: italic;" />
-                <ui:Button text="Delete" display-tooltip-when-elided="true" style="flex-direction: row;" />
+                <ui:Button text="Delete" display-tooltip-when-elided="true" name="DeleteButton" style="flex-direction: row;" />
             </ui:VisualElement>
             <ui:VisualElement name="Row1" style="flex-grow: 1; height: auto; border-left-width: 1px; border-right-width: 1px; border-top-width: 1px; border-bottom-width: 1px; border-left-color: rgb(5, 5, 5); border-right-color: rgb(5, 5, 5); border-top-color: rgb(5, 5, 5); border-bottom-color: rgb(5, 5, 5); padding-left: 10px; padding-right: 2px; padding-top: 3px; padding-bottom: 3px;">
                 <ui:Label text="General" display-tooltip-when-elided="true" style="background-color: rgb(46, 49, 51); -unity-font-style: bold-and-italic;" />

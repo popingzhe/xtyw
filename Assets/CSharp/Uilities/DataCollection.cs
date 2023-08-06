@@ -20,4 +20,9 @@ public class ItemDetails
     public float SellPercentage;
 }
 
-
+[System.Serializable]
+public struct InertoryItem
+{
+    public int itemID;
+    public int itemAmount;
+}

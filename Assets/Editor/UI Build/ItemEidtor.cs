@@ -65,11 +65,33 @@ public class ItemEidtor : EditorWindow
         itemType = ItemType.defalut;
         eField.Init(itemType,true);
 
+
         //加载数据
         LoadDataBase();
         //生成list
         GenerateListView();
 
+
+        //获取按键
+        root.Q<Button>("AddButton").clicked += OnAddItemClicked;
+        root.Q<Button>("DeleteButton").clicked += OnDeleteItemClicked;
+    }
+
+    private void OnDeleteItemClicked()
+    {
+        itemLists.Remove(activeItem);
+        itemListView.Rebuild();
+        itemDetailsSection.visible = false;
+    }
+
+    private void OnAddItemClicked()
+    {
+        ItemDetails newItem = new ItemDetails();
+        newItem.itemID = 1000 + itemLists.Count;
+        newItem.itemName = "NewItem";
+        itemLists.Add(newItem);
+
+        itemListView.Rebuild();
     }
 
     private void LoadDataBase()
@@ -91,7 +113,7 @@ public class ItemEidtor : EditorWindow
         {
             if(i<itemLists.Count)
             {
-                if (itemLists[i] != null)
+                if (itemLists[i].itemIcon != null)
                     e.Q<VisualElement>("icon").style.backgroundImage = itemLists[i].itemIcon.texture;
                 e.Q<Label>("Name").text = itemLists[i] == null ? "NO ITEM" : itemLists[i].itemName;
             }
@@ -135,13 +157,13 @@ public class ItemEidtor : EditorWindow
         });
 
         //更新预览图片
-        iconPreview.style.backgroundImage = activeItem.itemIcon.texture == null? defaultIcon.texture : activeItem.itemIcon.texture;
+        iconPreview.style.backgroundImage = activeItem.itemIcon == null? defaultIcon.texture : activeItem.itemIcon.texture;
         itemDetailsSection.Q<ObjectField>("ItemIcon").value = activeItem.itemIcon;
         itemDetailsSection.Q<ObjectField>("ItemIcon").RegisterValueChangedCallback(evt =>
         {
             Sprite newIcon = evt.newValue as Sprite;
             activeItem.itemIcon = newIcon;
-            iconPreview.style.backgroundImage = newIcon.texture == null? defaultIcon.texture:newIcon.texture;
+            iconPreview.style.backgroundImage = newIcon == null? defaultIcon.texture:newIcon.texture;
             itemListView.Rebuild();
         });
 
