@@ -5,5 +5,5 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "InertoryBag_SO", menuName = "Invertory/InertoryBag_SO")]
 public class InertoryBag_SO : ScriptableObject
 {
-    public List<InertoryItem> itemList;
+    public List<InvertoryItem> itemList;
 }

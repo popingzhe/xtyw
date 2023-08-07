@@ -8,3 +8,13 @@ public enum ItemType
     HoeTool,ChopTool,BreakTool,ReapTool,WaterTool,CollectTool,
     ReapableScenery,defalut
 }
+
+public enum SlotType
+{
+    Bag,Box,Shop
+}
+
+public enum InvertoryLocation
+{
+    Bag,Box, Shop
+}

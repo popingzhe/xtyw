@@ -11,6 +11,11 @@ public class InvertoryManager : Singleton<InvertoryManager>
     [Header("背包数据")]
     public InertoryBag_SO playerBag;
 
+
+    private void Start()
+    {
+        EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag, playerBag.itemList);
+    }
     //查找物品
     public ItemDetails GetItemDetails(int ID)
     {
@@ -30,6 +35,9 @@ public class InvertoryManager : Singleton<InvertoryManager>
         {
             Destroy(item.gameObject);
         }
+
+        //更新ui
+        EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag, playerBag.itemList); 
     }
 
     private bool CheckBagCapicity()
@@ -64,7 +72,7 @@ public class InvertoryManager : Singleton<InvertoryManager>
                 {
                     if (playerBag.itemList[i].itemID == 0)
                     {
-                        var newItem = new InertoryItem() { itemID = ID, itemAmount = amount };
+                        var newItem = new InvertoryItem() { itemID = ID, itemAmount = amount };
                         playerBag.itemList[i] = newItem;
                         break;
                     }
@@ -79,8 +87,28 @@ public class InvertoryManager : Singleton<InvertoryManager>
         else
         {
             var newCount = playerBag.itemList[index].itemAmount + amount;
-            var item = new InertoryItem() { itemID = ID, itemAmount = newCount };
+            var item = new InvertoryItem() { itemID = ID, itemAmount = newCount };
             playerBag.itemList[index] = item;
         }
+    }
+
+
+    //交换物品
+    public void SwapItem(int fromIndex, int targetIndex)
+    {
+        InvertoryItem currentItem = playerBag.itemList[fromIndex];
+        InvertoryItem targetItem = playerBag.itemList[targetIndex];
+
+        if(targetItem.itemAmount  != 0)
+        {
+            playerBag.itemList[fromIndex] = targetItem;
+            playerBag.itemList[targetIndex] = currentItem;
+        }
+        else
+        {
+            playerBag.itemList[targetIndex] = currentItem;
+            playerBag.itemList[fromIndex] = new InvertoryItem();
+        }
+        EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag, playerBag.itemList);
     }
 }

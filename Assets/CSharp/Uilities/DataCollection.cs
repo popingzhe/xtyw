@@ -21,8 +21,9 @@ public class ItemDetails
 }
 
 [System.Serializable]
-public struct InertoryItem
+public struct InvertoryItem
 {
     public int itemID;
     public int itemAmount;
 }
+
