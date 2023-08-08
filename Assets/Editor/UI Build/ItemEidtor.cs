@@ -167,6 +167,13 @@ public class ItemEidtor : EditorWindow
             itemListView.Rebuild();
         });
 
+        itemDetailsSection.Q<ObjectField>("ItemOnWorldSprite").value = activeItem.itemOnWorldSprite;
+        itemDetailsSection.Q<ObjectField>("ItemOnWorldSprite").RegisterValueChangedCallback(evt =>
+        {
+            Sprite newIcon = evt.newValue as Sprite;
+            activeItem.itemOnWorldSprite = newIcon;
+        });
+
         itemDetailsSection.Q<EnumField>("ItemType").value = activeItem.itemType;
         itemDetailsSection.Q<EnumField>("ItemType").RegisterValueChangedCallback(evt =>
         {

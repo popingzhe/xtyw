@@ -20,14 +20,19 @@ public class InvertoryUI : MonoBehaviour
     private void OnEnable()
     {
         EventHander.UpdateInvertoryUI += OnUpdateInvertoryUI;
-
+        EventHander.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
     }
 
     private void OnDisable()
     {
         EventHander.UpdateInvertoryUI -= OnUpdateInvertoryUI;
+        EventHander.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
     }
 
+    private void OnBeforeSceneUnloadEvent()
+    {
+        UpdateToHighLight(-1);
+    }
 
     private void Start()
     {

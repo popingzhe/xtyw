@@ -18,3 +18,13 @@ public enum InvertoryLocation
 {
     Bag,Box, Shop
 }
+
+public enum PartType
+{
+    None,Carry,Hoe,Break,
+}
+
+public enum PartName
+{
+    Body,Hair,Arm,Tool
+}

@@ -67,6 +67,12 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
         slotHighlight.gameObject.SetActive(isSelected);
 
         invertoryUI.UpdateToHighLight(index);
+
+        if(type == SlotType.Bag)
+        {
+            //Í¨Öª¶¯»­
+            EventHander.CallItemSelectEvent(itemDetails, isSelected);
+        }
     }
 
     public void OnBeginDrag(PointerEventData eventData)
