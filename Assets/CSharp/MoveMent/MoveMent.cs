@@ -26,6 +26,8 @@ public class MoveMent : MonoBehaviour
         EventHander.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHander.AfterSceneloadEvent += AfterSceneloadEvent;
         EventHander.MoveToPosition += OnMoveToPosition;
+        EventHander.MouseClickedEvent += OnMouseClickedEvent;
+
     }
 
     private void OnDisable()
@@ -33,6 +35,13 @@ public class MoveMent : MonoBehaviour
         EventHander.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHander.AfterSceneloadEvent -= AfterSceneloadEvent;
         EventHander.MoveToPosition -= OnMoveToPosition;
+        EventHander.MouseClickedEvent -= OnMouseClickedEvent;
+    }
+
+    private void OnMouseClickedEvent(Vector3 pos, ItemDetails details)
+    {
+        //TODOÖ´ÐÐ¶¯»­
+        EventHander.CallExecuteActionAfterAnimation(pos, details);
     }
 
     private void OnMoveToPosition(Vector3 targetPos)

@@ -8,27 +8,35 @@ public class EventHander
 {
     public static event Action<InvertoryLocation, List<InvertoryItem>> UpdateInvertoryUI;
 
-    public static void CallUpdateInvertoryUI(InvertoryLocation location,List<InvertoryItem> items)
+    public static void CallUpdateInvertoryUI(InvertoryLocation location, List<InvertoryItem> items)
     {
         UpdateInvertoryUI?.Invoke(location, items);
     }
 
     public static event Action<int, Vector3> InstantiateiyemInSence;
-    public static void CallInstantiateiyemInSence(int ID,Vector3 pos)
+    public static void CallInstantiateiyemInSence(int ID, Vector3 pos)
     {
         InstantiateiyemInSence?.Invoke(ID, pos);
     }
 
+    //ÈÓ¶«Î÷
+    public static event Action<int, Vector3> DropItemEvent;
+    public static void CallDropItemEvent(int ID, Vector3 pos)
+    {
+        DropItemEvent?.Invoke(ID, pos);
+    }
+
+
     public static event Action<ItemDetails, bool> ItemSelectEvent;
-    public static void CallItemSelectEvent(ItemDetails itemDetails,bool isSelected) 
-    { 
+    public static void CallItemSelectEvent(ItemDetails itemDetails, bool isSelected)
+    {
         ItemSelectEvent?.Invoke(itemDetails, isSelected);
     }
 
     public static event Action<String, string, Vector3> TransitionEvent;
-    public static void CallTransitionEvent(String s,string name,Vector3 pos)
+    public static void CallTransitionEvent(String s, string name, Vector3 pos)
     {
-        TransitionEvent?.Invoke(s,name, pos);
+        TransitionEvent?.Invoke(s, name, pos);
     }
 
     public static event Action BeforeSceneUnloadEvent;
@@ -48,4 +56,17 @@ public class EventHander
     {
         MoveToPosition?.Invoke(pos);
     }
+
+    public static event Action<Vector3, ItemDetails> MouseClickedEvent;
+    public static void CallMouseClickedEvent(Vector3 pos, ItemDetails itemDetails)
+    {
+        MouseClickedEvent?.Invoke(pos, itemDetails);
+    }
+
+    public static event Action<Vector3, ItemDetails> ExecuteActionAfterAnimation;
+    public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
+    {
+         ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
+    }
 }
+

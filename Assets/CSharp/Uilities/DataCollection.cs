@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [System.Serializable]
@@ -62,4 +63,38 @@ public class SerializableVector3
         public SerializableVector3 position;
     }
 
+}
+
+[System.Serializable]
+public class TileProperty
+{
+    public Vector2Int tileCoordinate;
+
+    public bool boolTypeValue;
+
+    public GridType gridType;
+}
+
+[System.Serializable]
+public class TileDetails
+{
+    public int girdX, girdY;
+
+    public bool canDig;
+
+    public bool canDropItem;
+
+    public bool canPlaceFutniture;
+
+    public bool isNPCObstacle;
+
+    public int daySinceDug = -1;
+
+    public int daySinceWatered =-1;
+
+    public int seedItem = -1;
+    
+    public int growthDays = -1;
+
+    public int daySinceLastHarvest = -1;
 }

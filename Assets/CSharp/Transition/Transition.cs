@@ -36,18 +36,20 @@ public class Transition : MonoBehaviour
         StartCoroutine(MTransition(s,sceneToGo,posToGo));
     }
 
-    private void Start()
+    private IEnumerator Start()
     {
+        yield return LoadScenceSetActive(startName);
         fadeCanvasDroup = FindObjectOfType<CanvasGroup>();
-        StartCoroutine(LoadScenceSetActive(startName));
+        EventHander.CallAfterSceneloadEvent();
 
     }
 
 
     private IEnumerator MTransition(String s,string sceneName,Vector3 targetPosition)
     {
-        yield return Fade(1);
         EventHander.CallBeforeSceneUnloadEvent();
+        yield return Fade(1);
+        
         yield return SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
 
         yield return LoadScenceSetActive(sceneName);

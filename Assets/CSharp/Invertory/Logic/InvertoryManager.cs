@@ -1,3 +1,5 @@
+using JetBrains.Annotations;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,6 +12,17 @@ public class InvertoryManager : Singleton<InvertoryManager>
 
     [Header("背包数据")]
     public InertoryBag_SO playerBag;
+
+
+    private void OnEnable()
+    {
+        EventHander.DropItemEvent += OnDropItemEvent;
+    }
+
+    private void OnDisable()
+    {
+        EventHander.DropItemEvent -= OnDropItemEvent;
+    }
 
 
     private void Start()
@@ -62,6 +75,22 @@ public class InvertoryManager : Singleton<InvertoryManager>
         }
         return index;
     }
+
+
+    private int GetItemIndexInBag(int ID)
+    {
+        {
+            var index = -1;
+            for (var i = 0; i < playerBag.itemList.Count; i++)
+            {
+                if (playerBag.itemList[i].itemID == ID)
+                {
+                    return i;
+                }
+            }
+            return index;
+        }
+    }
     private void AddItemAtIndex(int ID,int index,int amount)
     {
         if (index == -1 )//没有物品
@@ -111,4 +140,33 @@ public class InvertoryManager : Singleton<InvertoryManager>
         }
         EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag, playerBag.itemList);
     }
+
+    //移除指定数量的背包物品
+    private void RemoveItem(int ID,int removeAmount)
+    {
+        var index = GetItemIndexInBag(ID);
+       
+        if (playerBag.itemList[index].itemAmount > removeAmount)
+        {
+            
+            var amount = playerBag.itemList[index].itemAmount - removeAmount;
+            var item = new InvertoryItem{itemID = ID,itemAmount = amount };
+            playerBag.itemList[index] = item;
+        }
+        else if(playerBag.itemList[index].itemAmount == removeAmount)
+        {
+            var item = new InvertoryItem();
+            playerBag.itemList[index] = item;
+        }
+
+        EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag,playerBag.itemList);
+    }
+
+
+
+    private void OnDropItemEvent(int ID, Vector3 pos)
+    {
+        RemoveItem(ID, 1);
+    }
+
 }

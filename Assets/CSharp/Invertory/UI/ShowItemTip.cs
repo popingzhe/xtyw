@@ -18,7 +18,7 @@ public class ShowItemTip : MonoBehaviour,IPointerEnterHandler,IPointerExitHandle
 
     public void OnPointerEnter(PointerEventData eventData)
     {
-        if (soltUI.itemAmount > 0)
+        if (soltUI.itemDetails != null)
         {
             invertoryUI.itemToolTip.gameObject.SetActive(true);
             invertoryUI.itemToolTip.SetToolTip(soltUI.itemDetails, soltUI.type);

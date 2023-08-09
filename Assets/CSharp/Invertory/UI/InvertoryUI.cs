@@ -86,6 +86,7 @@ public class InvertoryUI : MonoBehaviour
                 {
                     if (list[i].itemAmount > 0)
                     {
+
                         var item = InvertoryManager.Instance.GetItemDetails(list[i].itemID);
                         playerSolts[i].UpdateSlot(item, list[i].itemAmount);
                     }

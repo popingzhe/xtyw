@@ -28,3 +28,8 @@ public enum PartName
 {
     Body,Hair,Arm,Tool
 }
+
+public enum GridType
+{
+    Diggable,DropItem,PlaceFurniture,NPCObstacle
+}

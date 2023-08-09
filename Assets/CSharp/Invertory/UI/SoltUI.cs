@@ -27,7 +27,7 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
     private void Start()
     {
         isSelected = false;
-        if(itemDetails.itemID == 0)
+        if(itemDetails == null)
         {
             UpdateEmptySolt(); 
         }
@@ -50,7 +50,10 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
         if (isSelected)
         {
             isSelected = false;
+            invertoryUI.UpdateToHighLight(-1);
+            EventHander.CallItemSelectEvent(itemDetails,isSelected);
         }
+        itemDetails = null;
         slotImage.enabled = false;
         amoutText.text = string.Empty;
         button.interactable = false;
@@ -62,7 +65,7 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
     //µã»÷»Øµ÷
     public void OnPointerClick(PointerEventData eventData)
     {
-        if (itemAmount <= 0) return;
+        if (itemDetails == null) return;
         isSelected = !isSelected;
         slotHighlight.gameObject.SetActive(isSelected);
 
@@ -77,7 +80,7 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        if (itemAmount <= 0) return;       
+        if (itemDetails == null) return;       
             invertoryUI.dragItem.enabled = true;
             invertoryUI.dragItem.sprite = slotImage.sprite;
             invertoryUI.dragItem.SetNativeSize();

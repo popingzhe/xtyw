@@ -8,9 +8,12 @@ using static SerializableVector3;
 public class ItemManger : MonoBehaviour
 {
     public Item itemPrefab;
+    public Item bouncePrefab;
+    
 
     private Transform itemParent;
 
+    private Transform playerTransform;
     //管理场景物品
     private Dictionary<string, List<SceneItem>> sceneItems = new Dictionary<string, List<SceneItem>>();
 
@@ -19,7 +22,7 @@ public class ItemManger : MonoBehaviour
         EventHander.InstantiateiyemInSence += OnInstantiateiyemInSence;
         EventHander.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
         EventHander.AfterSceneloadEvent += OnAfterSceneUnloadEvent;
-
+        EventHander.DropItemEvent += OnDropItemEvent;
     }
 
 
@@ -28,6 +31,12 @@ public class ItemManger : MonoBehaviour
         EventHander.InstantiateiyemInSence -= OnInstantiateiyemInSence;
         EventHander.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
         EventHander.AfterSceneloadEvent -= OnAfterSceneUnloadEvent;
+        EventHander.DropItemEvent -= OnDropItemEvent;
+    }
+
+    private void Start()
+    {
+        playerTransform = GameObject.FindWithTag("Player").GetComponent<Transform>();
     }
 
     private void OnBeforeSceneUnloadEvent()
@@ -47,6 +56,18 @@ public class ItemManger : MonoBehaviour
         var item = Instantiate(itemPrefab,pos,Quaternion.identity,itemParent);
         item.itemID = ID; 
     }
+
+
+    private void OnDropItemEvent(int ID, Vector3 mousePos)
+    {
+        
+        var item = Instantiate(bouncePrefab, playerTransform.position, Quaternion.identity, itemParent);
+        item.itemID = ID;
+        var dir = (mousePos - playerTransform.position).normalized;
+        item.GetComponent<ItemBounce>().InitBonceItem(mousePos,dir);
+    }
+
+
     private void GetAllSceneItem()
     {
         List<SceneItem> currentSceneItems = new List<SceneItem>();
