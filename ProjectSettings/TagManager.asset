@@ -6,6 +6,9 @@ TagManager:
   tags:
   - ItemParent
   - CurcosCanvs
+  - Dig
+  - Water1
+  - CropParent
   layers:
   - Default
   - TransparentFX

@@ -70,6 +70,9 @@ public class CurcosManager : MonoBehaviour
                 ItemType.Seed => seed,
                 ItemType.Commodity => Commodity,
                 ItemType.ChopTool => tool,
+                ItemType.HoeTool => tool,
+                ItemType.CollectTool => tool,
+    
                 _ => normal,
             };
             CursorEnable = true;
@@ -126,6 +129,7 @@ public class CurcosManager : MonoBehaviour
 
         //    Debug.Log("world"+mosueWorldPosition+"   gird"+ mouseGirdPosition);
         var playerPos = currentGrid.WorldToCell(playerTransform.position);
+        //使用范围限制
         if(Mathf.Abs(mouseGirdPosition.x - playerPos.x) > currentItem.itemUseRadius || 
             Mathf.Abs(mouseGirdPosition.y - playerPos.y) > currentItem.itemUseRadius)
         {
@@ -138,10 +142,31 @@ public class CurcosManager : MonoBehaviour
 
         if(currentTile != null)
         {
+            CropDetails currentCrop = CropManager.Instance.GetCropDetails(currentTile.seedItem);
             switch (currentItem.itemType)
             {
+                //物品类型判断
+                case ItemType.Seed:
+                    if(currentTile.daySinceDug > -1 &&currentTile.seedItem == -1) SetCutsorValid(); else SetCutsorInValid();
+                    break;
                 case ItemType.Commodity:
                     if (currentTile.canDropItem) SetCutsorValid();else SetCutsorInValid();
+                    break;
+                case ItemType.HoeTool:
+                    if (currentTile.canDig) SetCutsorValid(); else SetCutsorInValid();
+                    break;
+                case ItemType.WaterTool:
+                    if(currentTile.daySinceDug > -1 &&currentTile.daySinceWatered == -1 ) 
+                        SetCutsorValid();
+                    else SetCutsorInValid() ;
+                    break;
+                case ItemType.ChopTool:
+                case ItemType.CollectTool:
+                    if(currentCrop != null)
+                    {
+                        if(currentCrop.CheckToolAvailable(currentItem.itemID))
+                        if(currentTile.growthDays >= currentCrop.TotalGrowthDays) SetCutsorValid(); else SetCutsorInValid();
+                    }else SetCutsorInValid();
                     break;
             }
         }

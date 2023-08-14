@@ -53,14 +53,15 @@ public class ItemManger : MonoBehaviour
 
     private void OnInstantiateiyemInSence(int ID, Vector3 pos)
     {
-        var item = Instantiate(itemPrefab,pos,Quaternion.identity,itemParent);
-        item.itemID = ID; 
+        var item = Instantiate(bouncePrefab, pos,Quaternion.identity,itemParent);
+        item.itemID = ID;
+        item.GetComponent<ItemBounce>().InitBonceItem(pos, Vector3.up);
     }
 
 
-    private void OnDropItemEvent(int ID, Vector3 mousePos)
+    private void OnDropItemEvent(int ID, Vector3 mousePos,ItemType itemType)
     {
-        
+        if (itemType == ItemType.Seed) return;
         var item = Instantiate(bouncePrefab, playerTransform.position, Quaternion.identity, itemParent);
         item.itemID = ID;
         var dir = (mousePos - playerTransform.position).normalized;

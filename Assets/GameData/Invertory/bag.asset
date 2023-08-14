@@ -13,14 +13,44 @@ MonoBehaviour:
   m_Name: bag
   m_EditorClassIdentifier: 
   itemList:
-  - itemID: 1002
+  - itemID: 1011
     itemAmount: 8
+  - itemID: 1010
+    itemAmount: 8
+  - itemID: 1001
+    itemAmount: 8
+  - itemID: 1003
+    itemAmount: 44
+  - itemID: 1007
+    itemAmount: 1
+  - itemID: 1008
+    itemAmount: 1
+  - itemID: 1009
+    itemAmount: 1
+  - itemID: 1013
+    itemAmount: 83
+  - itemID: 1014
+    itemAmount: 1
   - itemID: 0
     itemAmount: 0
-  - itemID: 1001
-    itemAmount: 1
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
+  - itemID: 0
+    itemAmount: 0
   - itemID: 1006
-    itemAmount: 5
+    itemAmount: 7
   - itemID: 1004
     itemAmount: 3
   - itemID: 0
@@ -29,38 +59,8 @@ MonoBehaviour:
     itemAmount: 0
   - itemID: 0
     itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
-  - itemID: 0
-    itemAmount: 0
+  - itemID: 1002
+    itemAmount: 8
   - itemID: 0
     itemAmount: 0
   - itemID: 0

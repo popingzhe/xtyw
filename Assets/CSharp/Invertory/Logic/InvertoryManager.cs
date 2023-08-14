@@ -17,13 +17,24 @@ public class InvertoryManager : Singleton<InvertoryManager>
     private void OnEnable()
     {
         EventHander.DropItemEvent += OnDropItemEvent;
+        EventHander.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
     }
 
     private void OnDisable()
     {
         EventHander.DropItemEvent -= OnDropItemEvent;
+        EventHander.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
     }
 
+    private void OnHarvestAtPlayerPosition(int ID)
+    {
+        var index = GetItemIndexInBag(ID);
+
+        AddItemAtIndex(ID, index, 1);
+
+        //¸üÐÂui
+        EventHander.CallUpdateInvertoryUI(InvertoryLocation.Bag, playerBag.itemList);
+    }
 
     private void Start()
     {
@@ -164,7 +175,7 @@ public class InvertoryManager : Singleton<InvertoryManager>
 
 
 
-    private void OnDropItemEvent(int ID, Vector3 pos)
+    private void OnDropItemEvent(int ID, Vector3 pos, ItemType itemType)
     {
         RemoveItem(ID, 1);
     }

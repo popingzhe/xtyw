@@ -21,7 +21,7 @@ public enum InvertoryLocation
 
 public enum PartType
 {
-    None,Carry,Hoe,Break,
+    None,Carry,Hoe,Break,Water,Collect,Chop
 }
 
 public enum PartName
@@ -32,4 +32,9 @@ public enum PartName
 public enum GridType
 {
     Diggable,DropItem,PlaceFurniture,NPCObstacle
+}
+
+public enum Season
+{
+   spring,summer, autumn,winter
 }

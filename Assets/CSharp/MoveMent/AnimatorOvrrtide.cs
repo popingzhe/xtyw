@@ -27,12 +27,32 @@ public class AnimatorOvrrtide : MonoBehaviour
     {
         EventHander.ItemSelectEvent += OnItemSelectEvent;
         EventHander.BeforeSceneUnloadEvent += OnBeforeSceneUnloadEvent;
+        EventHander.HarvestAtPlayerPosition += OnHarvestAtPlayerPosition;
     }
 
     private void OnDisable()
     {
-        EventHander.ItemSelectEvent += OnItemSelectEvent;
+        EventHander.ItemSelectEvent -= OnItemSelectEvent;
         EventHander.BeforeSceneUnloadEvent -= OnBeforeSceneUnloadEvent;
+        EventHander.HarvestAtPlayerPosition -= OnHarvestAtPlayerPosition;
+    }
+
+    private void OnHarvestAtPlayerPosition(int ID)
+    {
+        Sprite itemSprite = InvertoryManager.Instance.GetItemDetails(ID).itemOnWorldSprite;
+        if(holdItem.enabled == false)
+        {
+            StartCoroutine(ShowItem(itemSprite));
+        }
+
+    }
+
+    private IEnumerator ShowItem(Sprite itemSprite)
+    {
+        holdItem.sprite = itemSprite;
+        holdItem.enabled = true;
+        yield return new WaitForSeconds(1f);
+        holdItem.enabled = false;
     }
 
     private void OnBeforeSceneUnloadEvent()
@@ -47,6 +67,10 @@ public class AnimatorOvrrtide : MonoBehaviour
         {
             ItemType.Seed => PartType.Carry,
             ItemType.Commodity => PartType.Carry,
+            ItemType.HoeTool => PartType.Hoe,
+            ItemType.WaterTool => PartType.Water,
+            ItemType.CollectTool => PartType.Collect,
+            ItemType.ChopTool => PartType.Chop,
             _ => PartType.None,
         };
 
@@ -62,8 +86,13 @@ public class AnimatorOvrrtide : MonoBehaviour
                 holdItem.sprite = details.itemOnWorldSprite;
                 holdItem.enabled = true;
             }
+            else
+            {
+                SwitchAnimator(PartType.None);
+                holdItem.enabled = false;
+            }
         }
-
+       
         SwitchAnimator(currentType);
 
     }
@@ -71,10 +100,12 @@ public class AnimatorOvrrtide : MonoBehaviour
 
     private void SwitchAnimator(PartType partType)
     {
+       // Debug.Log(partType);
         foreach (var item in animatortypes)
         {
             if(item.partType == partType)
             {
+            //    Debug.Log(item.partName);
                 animatorNameDict[item.partName.ToString()].runtimeAnimatorController = item.overrideController;
             }
         }

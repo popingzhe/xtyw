@@ -20,10 +20,10 @@ public class EventHander
     }
 
     //扔东西
-    public static event Action<int, Vector3> DropItemEvent;
-    public static void CallDropItemEvent(int ID, Vector3 pos)
+    public static event Action<int, Vector3,ItemType> DropItemEvent;
+    public static void CallDropItemEvent(int ID, Vector3 pos,ItemType itemType)
     {
-        DropItemEvent?.Invoke(ID, pos);
+        DropItemEvent?.Invoke(ID, pos,itemType);
     }
 
 
@@ -67,6 +67,45 @@ public class EventHander
     public static void CallExecuteActionAfterAnimation(Vector3 pos, ItemDetails itemDetails)
     {
          ExecuteActionAfterAnimation?.Invoke(pos, itemDetails);
+    }
+
+    //时间事件
+    public static event Action<int, int> GameMinuteEvenet;
+    public static void CallGameMinuteEvenet(int minute,int hour)
+    {
+        GameMinuteEvenet?.Invoke(minute, hour);
+    }
+
+    public static event Action<int, int, int, int,Season> GameDateEvenet;
+    public static void CallGameDateEvenet(int hour,int day,int month,int year,Season season)
+    {
+        GameDateEvenet?.Invoke(hour,day,month,year,season);
+    }
+
+    public static event Action<int, Season> GameDayEvenet;
+    public static void CallGameDayEvenet(int day,Season season)
+    {
+        GameDayEvenet?.Invoke(day,season);
+    }
+
+    public static event Action<int, TileDetails> PlantSeedEvent;
+    public static void CallPlantSeedEvent(int ID,TileDetails tile)
+    {
+        PlantSeedEvent?.Invoke(ID,tile);
+    }
+
+    public static Action<int> HarvestAtPlayerPosition;
+
+    public static void CallHarvestAtPlayerPosition(int ID)
+    {
+        HarvestAtPlayerPosition?.Invoke(ID);
+    }
+
+    public static Action RefreshCurrentMap;
+
+    public static void CallRefreshCurrentMap()
+    {
+        RefreshCurrentMap?.Invoke();
     }
 }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class MoveMent : MonoBehaviour
@@ -16,6 +17,11 @@ public class MoveMent : MonoBehaviour
     private float inputY;
 
     private Vector2 movementInput;
+
+    //动画使用工具
+    private float mouseX;
+    private float mouseY;
+    private bool useTool;
 
     bool isMoving;
     Animator[] animators;
@@ -38,10 +44,54 @@ public class MoveMent : MonoBehaviour
         EventHander.MouseClickedEvent -= OnMouseClickedEvent;
     }
 
-    private void OnMouseClickedEvent(Vector3 pos, ItemDetails details)
+
+
+
+    private void OnMouseClickedEvent(Vector3 mPos, ItemDetails details)
     {
         //TODO执行动画
-        EventHander.CallExecuteActionAfterAnimation(pos, details);
+        if(details.itemType != ItemType.Seed && details.itemType != ItemType.Commodity && details.itemType != ItemType.Furniture)
+        {
+            mouseX = mPos.x - transform.position.x;
+            mouseY = mPos.y - transform.position.y;
+
+            if (Mathf.Abs(mouseX) > Mathf.Abs(mouseY))
+            {
+                mouseY = 0;
+            }
+            else
+            {
+                mouseX = 0;
+            }
+            StartCoroutine(UseToolRoutine(mPos, details));
+        }
+        else
+        {
+            EventHander.CallExecuteActionAfterAnimation(mPos, details);
+        }
+
+
+       
+    }
+
+    private IEnumerator UseToolRoutine(Vector3 mouseWorldPos,ItemDetails details)
+    {
+        useTool = true;
+        inputDisable = true;
+        yield return null;
+        foreach (var anim in animators)
+        {
+            anim.SetTrigger("useTool");
+            anim.SetFloat("InputX", mouseX);
+            anim.SetFloat("InputY", mouseY);
+        }
+        //等待动画执行到砍下
+        yield return new WaitForSeconds(0.45f);
+        EventHander.CallExecuteActionAfterAnimation(mouseWorldPos, details);
+        yield return new WaitForSeconds(0.25f);
+
+        useTool = false;
+        inputDisable = false;
     }
 
     private void OnMoveToPosition(Vector3 targetPos)
@@ -113,6 +163,11 @@ public class MoveMent : MonoBehaviour
         foreach (var part in animators)
         {
             part.SetBool("isMoving", isMoving);
+
+            part.SetFloat("InputX", mouseX);
+            part.SetFloat("InputY", mouseY);
+
+
             if (isMoving)
             {
                 part.SetFloat("InputX", inputX);
