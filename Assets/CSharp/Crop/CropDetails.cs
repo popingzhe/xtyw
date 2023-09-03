@@ -47,6 +47,7 @@ public class CropDetails
 
     public bool hasParticalEffect;
     //todo
+    public ParticaleEffecttype particaleEffect;
 
 
     //工具是否可用

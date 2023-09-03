@@ -22,7 +22,7 @@ public class SoltUI : MonoBehaviour,IPointerClickHandler,IBeginDragHandler,IEndD
     public ItemDetails itemDetails;
     public int itemAmount;
 
-    private InvertoryUI invertoryUI =>GetComponentInParent<InvertoryUI>();
+    public InvertoryUI invertoryUI =>GetComponentInParent<InvertoryUI>();
 
     private void Start()
     {

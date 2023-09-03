@@ -38,3 +38,8 @@ public enum Season
 {
    spring,summer, autumn,winter
 }
+
+public enum ParticaleEffecttype
+{
+    None,LeavesFalling,Rock,ReapableScenery
+}

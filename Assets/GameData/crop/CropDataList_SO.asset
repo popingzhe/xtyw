@@ -41,6 +41,7 @@ MonoBehaviour:
     generateAtPlayerPosition: 1
     hasAimation: 0
     hasParticalEffect: 0
+    particaleEffect: 0
   - seedItemID: 1010
     growthDays: 0200000003000000030000000400000005000000
     TotalGrowthDays: 17
@@ -69,6 +70,7 @@ MonoBehaviour:
     generateAtPlayerPosition: 1
     hasAimation: 0
     hasParticalEffect: 0
+    particaleEffect: 0
   - seedItemID: 1013
     growthDays: 0200000003000000030000000400000005000000
     TotalGrowthDays: 17
@@ -96,7 +98,8 @@ MonoBehaviour:
     regrowTimes: 0
     generateAtPlayerPosition: 0
     hasAimation: 1
-    hasParticalEffect: 0
+    hasParticalEffect: 1
+    particaleEffect: 1
   - seedItemID: 1012
     growthDays: 00000000
     TotalGrowthDays: 0
@@ -117,3 +120,4 @@ MonoBehaviour:
     generateAtPlayerPosition: 0
     hasAimation: 0
     hasParticalEffect: 0
+    particaleEffect: 0

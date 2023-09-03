@@ -269,6 +269,7 @@ MonoBehaviour:
     generateAtPlayerPosition: 0
     hasAimation: 0
     hasParticalEffect: 0
+    particaleEffect: 0
   playerTransform: {fileID: 0}
 --- !u!61 &937915293357209801
 BoxCollider2D:
